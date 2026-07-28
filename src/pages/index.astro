@@ -6,6 +6,9 @@ const articles = (await getCollection('articles')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
+const HERO_IMAGE =
+  'https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1600&q=80';
+
 const categoryLabels: Record<string, string> = {
   comparatif: 'Comparatif',
   guide: 'Guide complet',
@@ -23,13 +26,15 @@ const categoryClass: Record<string, string> = {
   title="Guides et comparatifs pour animaux de compagnie"
   description="Comparatifs, guides d'achat et conseils pour bien choisir le matériel et les accessoires de votre animal de compagnie."
 >
-  <section class="hero">
-    <h1>Choisissez le meilleur équipement pour votre compagnon</h1>
-    <p>
-      Chaque jour, un nouveau contenu pour vous aider à décider : comparatifs
-      détaillés, guides d'achat complets et conseils pratiques, sans jargon
-      inutile.
-    </p>
+  <section class="hero" style={`--hero-image: url(${HERO_IMAGE})`}>
+    <div class="hero-content">
+      <h1>Choisissez le meilleur équipement pour votre compagnon</h1>
+      <p>
+        Chaque jour, un nouveau contenu pour vous aider à décider : comparatifs
+        détaillés, guides d'achat complets et conseils pratiques, sans jargon
+        inutile.
+      </p>
+    </div>
   </section>
 
   <ul class="article-grid">
@@ -37,12 +42,19 @@ const categoryClass: Record<string, string> = {
       articles.map((article) => (
         <li class="article-card">
           <a href={`/articles/${article.id}/`}>
-            <span class={`badge ${categoryClass[article.data.category]}`}>
-              {categoryLabels[article.data.category]}
-            </span>
-            <h2>{article.data.title}</h2>
-            <p>{article.data.description}</p>
-            <span class="read-more">Lire l'article →</span>
+            {article.data.coverImage && (
+              <div class="card-image">
+                <img src={article.data.coverImage} alt="" loading="lazy" />
+                <span class={`badge ${categoryClass[article.data.category]}`}>
+                  {categoryLabels[article.data.category]}
+                </span>
+              </div>
+            )}
+            <div class="card-body">
+              <h2>{article.data.title}</h2>
+              <p>{article.data.description}</p>
+              <span class="read-more">Lire l'article →</span>
+            </div>
           </a>
         </li>
       ))
@@ -54,23 +66,39 @@ const categoryClass: Record<string, string> = {
 
 <style>
   .hero {
-    background-color: var(--color-secondary-light);
+    position: relative;
     border-radius: 20px;
-    padding: 2.5rem 2rem;
     margin-bottom: 2.5rem;
+    overflow: hidden;
+    background-image:
+      linear-gradient(180deg, rgba(15, 40, 38, 0.35) 0%, rgba(15, 40, 38, 0.75) 100%),
+      var(--hero-image);
+    background-size: cover;
+    background-position: center 30%;
+    min-height: 320px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .hero-content {
+    padding: 2.5rem 2rem;
     text-align: center;
+    width: 100%;
   }
 
   .hero h1 {
-    font-size: 2rem;
+    font-size: 2.1rem;
     margin: 0 0 0.75rem;
+    color: #ffffff;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
   }
 
   .hero p {
-    color: var(--color-text-muted);
+    color: #f4f9f7;
     max-width: 46ch;
     margin-inline: auto;
     font-size: 1.05rem;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   }
 
   .article-grid {
@@ -78,19 +106,21 @@ const categoryClass: Record<string, string> = {
     padding: 0;
     margin: 0;
     display: grid;
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
   }
 
   .article-card {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 16px;
+    overflow: hidden;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
 
   .article-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(20, 40, 38, 0.12);
     border-color: transparent;
   }
 
@@ -98,15 +128,43 @@ const categoryClass: Record<string, string> = {
     text-decoration: none;
     color: inherit;
     display: block;
-    padding: 1.5rem;
   }
 
-  .article-card h2 {
-    margin: 0.75rem 0 0.5rem;
-    font-size: 1.3rem;
+  .card-image {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background-color: var(--color-secondary-light);
   }
 
-  .article-card p {
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+  }
+
+  .article-card:hover .card-image img {
+    transform: scale(1.05);
+  }
+
+  .card-image .badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .card-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .card-body h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .card-body p {
     color: var(--color-text-muted);
     margin: 0;
   }
@@ -125,22 +183,23 @@ const categoryClass: Record<string, string> = {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    padding: 0.25rem 0.7rem;
+    padding: 0.3rem 0.75rem;
     border-radius: 999px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
   }
 
   .badge-comparatif {
-    background-color: #f5e2da;
+    background-color: #fdece0;
     color: var(--color-primary-dark);
   }
 
   .badge-guide {
     background-color: var(--color-secondary-light);
-    color: var(--color-secondary);
+    color: var(--color-secondary-dark);
   }
 
   .badge-article {
     background-color: var(--color-accent-light);
-    color: var(--color-accent);
+    color: var(--color-accent-dark);
   }
 </style>

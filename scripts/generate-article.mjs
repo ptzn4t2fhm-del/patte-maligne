@@ -9,6 +9,7 @@ import { dump as dumpYaml } from 'js-yaml';
 
 import { getNextTopic } from './topics.mjs';
 import { buildAffiliateSearchUrl } from './affiliate.mjs';
+import { pickCoverImage } from './pet-images.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ARTICLES_DIR = path.join(__dirname, '..', 'src', 'content', 'articles');
@@ -152,12 +153,15 @@ intégrés naturellement, et une FAQ finale.`;
   const dateStr = pubDate.toISOString().slice(0, 10);
   const fileSlug = `${dateStr}-${slugify(article.slug || article.title)}`;
 
+  const coverImage = pickCoverImage(topic);
+
   const frontmatter = dumpYaml({
     title: article.title,
     description: article.metaDescription,
     pubDate: pubDate.toISOString(),
     category,
     keywords: article.keywords,
+    coverImage,
     products,
     faq: article.faq,
   });
