@@ -16,7 +16,7 @@ keywords:
   - Trixie natura
 products:
   - name: Ferplast Baita 100
-    affiliateUrl: https://www.amazon.fr/s?k=Ferplast+Baita+100
+    affiliateUrl: https://www.amazon.fr/s?k=Ferplast+Baita+100+Comparatif+niches+d%27ext%C3%A9rieur+pour+chien
     rating: 4.6
     pros:
       - Bois massif de qualité avec finition vitrifiée durable
@@ -27,7 +27,7 @@ products:
       - Nécessite un entretien annuel de la lasure
       - Montage à deux personnes recommandé pour les grandes tailles
   - name: Trixie natura à toit plat
-    affiliateUrl: https://www.amazon.fr/s?k=Trixie+natura+%C3%A0+toit+plat
+    affiliateUrl: https://www.amazon.fr/s?k=Trixie+natura+%C3%A0+toit+plat+Comparatif+niches+d%27ext%C3%A9rieur+pour+chien
     rating: 4.1
     pros:
       - Prix d'entrée de gamme très attractif
@@ -38,7 +38,7 @@ products:
       - Lasure d'origine à renforcer dès la première année
       - Moins adaptée aux très grandes races
   - name: Zolux Chalet
-    affiliateUrl: https://www.amazon.fr/s?k=Zolux+Chalet
+    affiliateUrl: https://www.amazon.fr/s?k=Zolux+Chalet+Comparatif+niches+d%27ext%C3%A9rieur+pour+chien
     rating: 4.3
     pros:
       - Design chalet à double pente élégant
@@ -48,7 +48,7 @@ products:
       - Poids élevé, difficile à déplacer une fois montée
       - Feutre bitumé du toit à vérifier régulièrement
   - name: PetSafe ecoFlex Dog House
-    affiliateUrl: https://www.amazon.fr/s?k=PetSafe+ecoFlex+Dog+House
+    affiliateUrl: https://www.amazon.fr/s?k=PetSafe+ecoFlex+Dog+House+Comparatif+niches+d%27ext%C3%A9rieur+pour+chien
     rating: 4.4
     pros:
       - Matériau composite bois-plastique recyclé sans entretien
@@ -60,7 +60,7 @@ products:
       - Aspect moins traditionnel que le bois massif
       - Positionnement tarifaire premium
   - name: Kerbl niche isolée Barn
-    affiliateUrl: https://www.amazon.fr/s?k=Kerbl+niche+isol%C3%A9e+Barn
+    affiliateUrl: https://www.amazon.fr/s?k=Kerbl+niche+isol%C3%A9e+Barn+Comparatif+niches+d%27ext%C3%A9rieur+pour+chien
     rating: 4.7
     pros:
       - Isolation intégrée sur toutes les parois, plancher et toit

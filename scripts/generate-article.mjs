@@ -141,9 +141,14 @@ intégrés naturellement, et une FAQ finale.`;
   const parsedJson = JSON.parse(textBlock.text);
   const article = GeneratedArticleSchema.parse(parsedJson);
 
+  // Contexte ajouté à chaque recherche Amazon pour désambiguïser les noms de
+  // produits génériques (ex: "Ferplast Baita 100" seul peut remonter des
+  // tapis ou accessoires Ferplast au lieu d'une niche pour chien).
+  const searchContext = topic.replace(/\s+en\s+\d{4}\b/i, '').trim();
+
   const products = article.products.map((product) => ({
     name: product.name,
-    affiliateUrl: buildAffiliateSearchUrl(product.name),
+    affiliateUrl: buildAffiliateSearchUrl(product.name, searchContext),
     rating: product.rating,
     pros: product.pros,
     cons: product.cons,
