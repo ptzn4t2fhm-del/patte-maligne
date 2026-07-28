@@ -1,0 +1,146 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const categoryLabels: Record<string, string> = {
+  comparatif: 'Comparatif',
+  guide: 'Guide complet',
+  article: 'Article',
+};
+
+const categoryClass: Record<string, string> = {
+  comparatif: 'badge-comparatif',
+  guide: 'badge-guide',
+  article: 'badge-article',
+};
+---
+
+<BaseLayout
+  title="Guides et comparatifs pour animaux de compagnie"
+  description="Comparatifs, guides d'achat et conseils pour bien choisir le matériel et les accessoires de votre animal de compagnie."
+>
+  <section class="hero">
+    <h1>Choisissez le meilleur équipement pour votre compagnon</h1>
+    <p>
+      Chaque jour, un nouveau contenu pour vous aider à décider : comparatifs
+      détaillés, guides d'achat complets et conseils pratiques, sans jargon
+      inutile.
+    </p>
+  </section>
+
+  <ul class="article-grid">
+    {
+      articles.map((article) => (
+        <li class="article-card">
+          <a href={`/articles/${article.id}/`}>
+            <span class={`badge ${categoryClass[article.data.category]}`}>
+              {categoryLabels[article.data.category]}
+            </span>
+            <h2>{article.data.title}</h2>
+            <p>{article.data.description}</p>
+            <span class="read-more">Lire l'article →</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  {articles.length === 0 && <p>Aucun article publié pour le moment.</p>}
+</BaseLayout>
+
+<style>
+  .hero {
+    background-color: var(--color-secondary-light);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .hero p {
+    color: var(--color-text-muted);
+    max-width: 46ch;
+    margin-inline: auto;
+    font-size: 1.05rem;
+  }
+
+  .article-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .article-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .article-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(45, 42, 38, 0.08);
+    border-color: transparent;
+  }
+
+  .article-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 1.5rem;
+  }
+
+  .article-card h2 {
+    margin: 0.75rem 0 0.5rem;
+    font-size: 1.3rem;
+  }
+
+  .article-card p {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+  }
+
+  .badge-comparatif {
+    background-color: #f5e2da;
+    color: var(--color-primary-dark);
+  }
+
+  .badge-guide {
+    background-color: var(--color-secondary-light);
+    color: var(--color-secondary);
+  }
+
+  .badge-article {
+    background-color: var(--color-accent-light);
+    color: var(--color-accent);
+  }
+</style>

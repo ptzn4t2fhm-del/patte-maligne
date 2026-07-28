@@ -1,0 +1,166 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Product {
+  name: string;
+  affiliateUrl: string;
+  imageUrl?: string;
+  rating?: number;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  category: 'comparatif' | 'guide' | 'article';
+  image?: string;
+  faq?: FAQItem[];
+  products?: Product[];
+}
+
+const { title, description, pubDate, category, image, faq = [], products = [] } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: pubDate.toISOString(),
+  ...(image ? { image: new URL(image, Astro.site).toString() } : {}),
+  mainEntityOfPage: canonicalURL.toString(),
+};
+
+const faqJsonLd =
+  faq.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+
+const itemListJsonLd =
+  category === 'comparatif' && products.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: products.map((p, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: p.name,
+          url: p.affiliateUrl,
+        })),
+      }
+    : null;
+
+const categoryLabels: Record<string, string> = {
+  comparatif: 'Comparatif',
+  guide: 'Guide complet',
+  article: 'Article',
+};
+
+const categoryClass: Record<string, string> = {
+  comparatif: 'badge-comparatif',
+  guide: 'badge-guide',
+  article: 'badge-article',
+};
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+  {faqJsonLd && <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
+  {itemListJsonLd && <script slot="head" type="application/ld+json" set:html={JSON.stringify(itemListJsonLd)} />}
+
+  <article>
+    <span class={`category-badge ${categoryClass[category]}`}>{categoryLabels[category]}</span>
+    <h1>{title}</h1>
+    <p class="meta">
+      Publié le {pubDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+    </p>
+    {image && <img src={image} alt={title} />}
+
+    <div class="article-body">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .category-badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+
+  .badge-comparatif {
+    background-color: #f5e2da;
+    color: var(--color-primary-dark);
+  }
+
+  .badge-guide {
+    background-color: var(--color-secondary-light);
+    color: var(--color-secondary);
+  }
+
+  .badge-article {
+    background-color: var(--color-accent-light);
+    color: var(--color-accent);
+  }
+
+  article {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 2rem 2.25rem 2.5rem;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
+
+  .meta {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  img {
+    border-radius: 12px;
+  }
+
+  .article-body :global(h2) {
+    margin-top: 2.5rem;
+    font-size: 1.4rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--color-secondary-light);
+  }
+
+  .article-body :global(h3) {
+    margin-top: 1.75rem;
+    font-size: 1.15rem;
+    color: var(--color-primary-dark);
+  }
+
+  .article-body :global(a) {
+    color: var(--color-primary);
+  }
+</style>

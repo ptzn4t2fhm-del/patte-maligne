@@ -1,0 +1,94 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+const items = headings.filter((h) => h.depth === 2);
+---
+
+{items.length > 1 && (
+  <nav class="toc" aria-label="Sommaire">
+    <p class="toc-title">Sommaire</p>
+    <ol class="toc-grid">
+      {items.map((item, index) => (
+        <li>
+          <a href={`#${item.slug}`} class="toc-card">
+            <span class="toc-number">{index + 1}</span>
+            <span class="toc-text">{item.text}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<style>
+  .toc {
+    background-color: var(--color-secondary-light);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    margin-block: 1.5rem 2rem;
+  }
+
+  .toc-title {
+    margin: 0 0 0.9rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+  }
+
+  .toc-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.65rem;
+  }
+
+  .toc-card {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    height: 100%;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .toc-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  .toc-number {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--color-secondary-light);
+    color: var(--color-secondary);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+</style>

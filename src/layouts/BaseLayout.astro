@@ -1,0 +1,187 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteName = 'Patte Maligne';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title} | {siteName}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={new URL(image, Astro.site)} />}
+
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="container">
+        <a href="/" class="logo">
+          <span class="logo-text">{siteName}</span>
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>
+          En tant que Partenaire Amazon, ce site réalise un bénéfice sur les
+          achats remplissant les conditions requises.
+        </p>
+        <p class="footer-links">
+          <a href="/mentions-legales">Mentions légales</a>
+          <span aria-hidden="true">·</span>
+          <a href="/politique-de-confidentialite">Politique de confidentialité</a>
+        </p>
+        <p>&copy; {new Date().getFullYear()} {siteName}</p>
+      </div>
+    </footer>
+
+    <style is:global>
+      :root {
+        color-scheme: light;
+
+        --color-primary: #c96b4a;
+        --color-primary-dark: #a8543a;
+        --color-secondary: #6b8f71;
+        --color-secondary-light: #e4ede1;
+        --color-accent: #7c93c9;
+        --color-accent-light: #e6ebf7;
+        --color-bg: #fbf7f2;
+        --color-surface: #ffffff;
+        --color-text: #2d2a26;
+        --color-text-muted: #6b645c;
+        --color-border: #ece3d6;
+
+        --font-heading: 'Fraunces', Georgia, serif;
+        --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-body);
+        line-height: 1.65;
+        color: var(--color-text);
+        background-color: var(--color-bg);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: var(--font-heading);
+        line-height: 1.25;
+        color: var(--color-text);
+      }
+
+      a {
+        color: var(--color-primary);
+      }
+
+      .container {
+        max-width: 1080px;
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+      }
+
+      main {
+        max-width: 760px;
+        margin-inline: auto;
+        padding: 2.5rem 1.25rem 4rem;
+      }
+
+      .site-header {
+        background-color: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        padding: 1.6rem 0;
+      }
+
+      .site-header nav {
+        display: flex;
+        justify-content: center;
+      }
+
+      .site-header .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        text-decoration: none;
+      }
+
+      .logo-text {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1.9rem;
+        letter-spacing: 0.01em;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: var(--color-primary-dark);
+      }
+
+      .site-footer {
+        background-color: var(--color-secondary-light);
+        border-top: 1px solid var(--color-border);
+        padding: 2.5rem 0;
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        text-align: center;
+      }
+
+      .site-footer p {
+        margin: 0.35rem 0;
+      }
+
+      .footer-links a {
+        color: var(--color-text-muted);
+        text-decoration: underline;
+      }
+
+      .footer-links span {
+        margin-inline: 0.35rem;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </body>
+</html>
