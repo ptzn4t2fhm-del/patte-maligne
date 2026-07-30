@@ -1,5 +1,5 @@
 {
-  "dayCount": 2,
+  "dayCount": 3,
   "usedTopics": {
     "comparatif": [
       "Comparatif niches d'extérieur pour chien"
@@ -7,6 +7,8 @@
     "guide": [
       "Guide complet sur l'hydratation et les fontaines à eau pour chat"
     ],
-    "article": []
+    "article": [
+      "Chat et plantes d'intérieur : les précautions à prendre"
+    ]
   }
 }
