@@ -13,7 +13,7 @@ keywords:
   - herbe à chat
   - plantes non toxiques félin
 coverImage: >-
-  https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80
+  https://images.unsplash.com/photo-1746092111692-d89d6b02ce00?auto=format&fit=crop&w=1200&q=80
 products:
   - name: Kit d'herbe à chat Cat Grass à faire pousser (graines d'orge et avoine)
     affiliateUrl: >-

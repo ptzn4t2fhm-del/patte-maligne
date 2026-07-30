@@ -15,7 +15,7 @@ keywords:
   - chat qui ne boit pas
   - abreuvoir chat
 coverImage: >-
-  https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80
+  https://images.unsplash.com/photo-1764741368227-38ac9fd670a2?auto=format&fit=crop&w=1200&q=80
 products:
   - name: Catit Flower Fountain 3L
     affiliateUrl: >-

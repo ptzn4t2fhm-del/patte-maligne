@@ -5,7 +5,7 @@ description: >-
   plastique, isolées. Notes, avantages, inconvénients et classement final.
 pubDate: '2026-07-28T19:43:03.163Z'
 category: comparatif
-coverImage: 'https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=1200&q=80'
+coverImage: 'https://images.unsplash.com/photo-1777196896095-32407293d5b0?auto=format&fit=crop&w=1200&q=80'
 keywords:
   - niche extérieur chien
   - comparatif niche chien
