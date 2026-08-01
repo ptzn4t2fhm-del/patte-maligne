@@ -1,12 +1,13 @@
 {
-  "dayCount": 4,
+  "dayCount": 5,
   "usedTopics": {
     "comparatif": [
       "Comparatif niches d'extérieur pour chien",
       "Comparatif jouets interactifs pour chat"
     ],
     "guide": [
-      "Guide complet sur l'hydratation et les fontaines à eau pour chat"
+      "Guide complet sur l'hydratation et les fontaines à eau pour chat",
+      "Guide d'achat : accessoires indispensables pour un nouveau chaton"
     ],
     "article": [
       "Chat et plantes d'intérieur : les précautions à prendre"
