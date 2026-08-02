@@ -1,5 +1,5 @@
 {
-  "dayCount": 5,
+  "dayCount": 6,
   "usedTopics": {
     "comparatif": [
       "Comparatif niches d'extérieur pour chien",
@@ -10,7 +10,8 @@
       "Guide d'achat : accessoires indispensables pour un nouveau chaton"
     ],
     "article": [
-      "Chat et plantes d'intérieur : les précautions à prendre"
+      "Chat et plantes d'intérieur : les précautions à prendre",
+      "Comment reconnaître le stress chez son chat"
     ]
   }
 }
