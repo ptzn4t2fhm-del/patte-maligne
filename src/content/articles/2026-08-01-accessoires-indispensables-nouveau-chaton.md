@@ -16,7 +16,7 @@ keywords:
   - guide achat chaton
   - équipement chaton
 coverImage: >-
-  https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?auto=format&fit=crop&w=1200&q=80
+  https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=1200&q=80
 products:
   - name: Ferplast Atlas 10 Open
     affiliateUrl: >-

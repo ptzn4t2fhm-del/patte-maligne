@@ -15,7 +15,7 @@ keywords:
   - bien-être félin
   - chat anxieux
 coverImage: >-
-  https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?auto=format&fit=crop&w=1200&q=80
+  https://images.unsplash.com/photo-1549545931-59bf067af9ab?auto=format&fit=crop&w=1200&q=80
 products:
   - name: Feliway Classic Diffuseur
     affiliateUrl: >-

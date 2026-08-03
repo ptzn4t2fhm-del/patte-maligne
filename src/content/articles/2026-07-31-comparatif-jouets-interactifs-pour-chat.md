@@ -15,7 +15,7 @@ keywords:
   - stimulation mentale chat
   - meilleur jouet chat 2026
 coverImage: >-
-  https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?auto=format&fit=crop&w=1200&q=80
+  https://images.unsplash.com/photo-1638826595775-e2eae86cda8e?auto=format&fit=crop&w=1200&q=80
 products:
   - name: Catit Senses 2.0 Circuit
     affiliateUrl: >-

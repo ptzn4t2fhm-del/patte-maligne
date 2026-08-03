@@ -15,7 +15,7 @@ keywords:
   - Purina One
   - croquettes chat stérilisé
 coverImage: >-
-  https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?auto=format&fit=crop&w=1200&q=80
+  https://images.unsplash.com/photo-1774797405267-7c452cb85652?auto=format&fit=crop&w=1200&q=80
 products:
   - name: Royal Canin Sterilised 37
     affiliateUrl: >-
