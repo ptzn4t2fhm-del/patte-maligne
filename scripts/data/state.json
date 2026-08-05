@@ -1,5 +1,5 @@
 {
-  "dayCount": 8,
+  "dayCount": 9,
   "usedTopics": {
     "comparatif": [
       "Comparatif niches d'extérieur pour chien",
@@ -13,7 +13,8 @@
     ],
     "article": [
       "Chat et plantes d'intérieur : les précautions à prendre",
-      "Comment reconnaître le stress chez son chat"
+      "Comment reconnaître le stress chez son chat",
+      "Les idées reçues sur l'alimentation des animaux"
     ]
   }
 }
